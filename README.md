@@ -1,5 +1,5 @@
 # stream-input
-a dbus Input plugin that can integrate with external system.
+a [dbus](https://github.com/funkygao/dbus) Input plugin that can integrate with external system.
 
 ### Usage
 
