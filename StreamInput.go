@@ -1,3 +1,4 @@
+// Package streaminput provides a dbus Input plugin that can integrate with external system
 package streaminput
 
 import (
@@ -7,6 +8,10 @@ import (
 	"github.com/funkygao/dbus/pkg/model"
 	"github.com/funkygao/golib/pipestream"
 	conf "github.com/funkygao/jsconf"
+)
+
+var (
+	_ engine.Input = &StreamInput{}
 )
 
 // StreamInput is a dbus Input plugin that can integrate with external system.
@@ -41,7 +46,7 @@ func (this *StreamInput) Run(r engine.InputRunner, h engine.PluginHelper) error 
 
 		pack, ok := <-r.InChan()
 		if !ok {
-            // dbus shutdown
+			// dbus shutdown
 			break
 		}
 
@@ -50,4 +55,10 @@ func (this *StreamInput) Run(r engine.InputRunner, h engine.PluginHelper) error 
 	}
 
 	return nil
+}
+
+func init() {
+	engine.RegisterPlugin("StreamInput", func() engine.Plugin {
+		return new(StreamInput)
+	})
 }
