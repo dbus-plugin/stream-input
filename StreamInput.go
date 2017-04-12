@@ -44,14 +44,14 @@ func (this *StreamInput) Run(r engine.InputRunner, h engine.PluginHelper) error 
 	for scanner.Scan() {
 		line := scanner.Bytes()
 
-		pack, ok := <-r.InChan()
+		pack, ok := <-r.Exchange().InChan()
 		if !ok {
 			// dbus shutdown
 			break
 		}
 
 		pack.Payload = model.Bytes(line)
-		r.Inject(pack)
+		r.Exchange().Inject(pack)
 	}
 
 	return nil
