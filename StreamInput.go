@@ -44,6 +44,12 @@ func (this *StreamInput) Run(r engine.InputRunner, h engine.PluginHelper) error 
 	for scanner.Scan() {
 		line := scanner.Bytes()
 
+		select {
+		case <-h.Stopper():
+			return
+		default:
+		}
+
 		pack := <-r.Exchange().InChan()
 		pack.Payload = model.Bytes(line)
 		r.Exchange().Inject(pack)
