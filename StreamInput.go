@@ -44,12 +44,7 @@ func (this *StreamInput) Run(r engine.InputRunner, h engine.PluginHelper) error 
 	for scanner.Scan() {
 		line := scanner.Bytes()
 
-		pack, ok := <-r.Exchange().InChan()
-		if !ok {
-			// dbus shutdown
-			break
-		}
-
+		pack := <-r.Exchange().InChan()
 		pack.Payload = model.Bytes(line)
 		r.Exchange().Inject(pack)
 	}
