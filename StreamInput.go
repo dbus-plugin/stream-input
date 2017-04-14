@@ -46,7 +46,7 @@ func (this *StreamInput) Run(r engine.InputRunner, h engine.PluginHelper) error 
 
 		select {
 		case <-h.Stopper():
-			return
+			return nil
 		default:
 		}
 
