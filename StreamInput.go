@@ -26,6 +26,12 @@ func (this *StreamInput) Init(config *conf.Conf) {
 	}
 }
 
+func (this *StreamInput) SampleConfig() string {
+	return `
+	cmd: ["tail", "-F", "/var/log/messages"]
+	`
+}
+
 func (this *StreamInput) OnAck(pack *engine.Packet) error {
 	return nil
 }
