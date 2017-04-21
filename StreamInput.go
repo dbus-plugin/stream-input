@@ -32,11 +32,11 @@ func (this *StreamInput) SampleConfig() string {
 	`
 }
 
-func (this *StreamInput) OnAck(pack *engine.Packet) error {
+func (this *StreamInput) Ack(pack *engine.Packet) error {
 	return nil
 }
 
-func (this *StreamInput) StopAcker(r engine.InputRunner) {}
+func (this *StreamInput) End(r engine.InputRunner) {}
 
 func (this *StreamInput) Run(r engine.InputRunner, h engine.PluginHelper) error {
 	cmd := pipestream.New(this.cmdAndArgs[0], this.cmdAndArgs[1:]...)
