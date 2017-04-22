@@ -58,7 +58,7 @@ func (this *StreamInput) Run(r engine.InputRunner, h engine.PluginHelper) error 
 
 		pack := <-r.Exchange().InChan()
 		pack.Payload = model.Bytes(line)
-		r.Exchange().Inject(pack)
+		r.Exchange().Emit(pack)
 	}
 
 	return nil
